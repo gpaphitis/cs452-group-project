@@ -1,0 +1,2 @@
+Make the nredu ce value from static to dynamic based on the number of workers that register.
+Make the workers get the map and reduce functions from the master
