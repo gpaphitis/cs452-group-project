@@ -8,6 +8,7 @@ import (
 	"os"
 	"sync"
 	"fmt"
+	"strings"
 )
 
 // Worker holds the state for a server waiting for DoTask or Shutdown RPCs
@@ -139,7 +140,10 @@ func RunWorker(MasterAddress string, me string, nRPC int) {
 	rpcs := rpc.NewServer()
 	rpcs.Register(wk)
 	os.Remove(me) // only needed for "tcp"
-	l, e := net.Listen("tcp", me)
+	lastColon := strings.LastIndex(me, ":")
+	// Get the last token including the colon
+	port := me[lastColon:]
+	l, e := net.Listen("tcp", port)
 	if e != nil {
 		log.Fatal("RunWorker: worker ", me, " error: ", e)
 	}

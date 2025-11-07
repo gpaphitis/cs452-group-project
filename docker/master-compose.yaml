@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  webserver:
+    build:
+      context: ..                     
+      dockerfile: master.Dockerfile
+    image: cs452-master
+    container_name: master
+    ports:
+      - "9000:9000"
+      - "9100:9100"
+    working_dir: /app
+    command: application :9000 :9100

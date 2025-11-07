@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	appAddr := "node0:9000" // must match the Application.Listen() address in your main.go
+	appAddr := ":9000" // must match the Application.Listen() address in your main.go
 
 	// Connect to the Application RPC server
 	client, err := rpc.Dial("tcp", appAddr)
@@ -21,7 +21,8 @@ func main() {
 	// Prepare the RunTask arguments
 	args := &mapreduce.RunTaskArgs{
 		JobName:    "inverse-index",
-		Files:      []string{"test/data/pg-being_ernest.txt", "test/data/pg-dorian_gray.txt"},
+		// Files:      []string{"test/data/pg-being_ernest.txt", "test/data/pg-dorian_gray.txt"},
+		Files:      []string{"/app/data/pg-being_ernest.txt","/app/data/pg-dracula.txt","/app/data/pg-frankenstein.txt","/app/data/pg-grimm.txt","/app/data/pg-les_miserables.txt","/app/data/pg-moby_dick.txt","/app/data/pg-tale_of_two_cities.txt","/app/data/pg-ulysses.txt","/app/data/pg-dorian_gray.txt","/app/data/pg-emma.txt","/app/data/pg-great_expectations.txt","/app/data/pg-huckleberry_finn.txt","/app/data/pg-metamorphosis.txt","/app/data/pg-sherlock_holmes.txt","/app/data/pg-tom_sawyer.txt","/app/data/pg-war_and_peace.txt"},
 		MapName:    "inverseindex/map",
 		ReduceName: "inverseindex/reduce",
 	}
