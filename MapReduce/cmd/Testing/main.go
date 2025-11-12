@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	appAddr := ":9000" // must match the Application.Listen() address in your main.go
+	appAddr := "node0:9000" // must match the Application.Listen() address in your main.go
 
 	// Connect to the Application RPC server
 	client, err := rpc.Dial("tcp", appAddr)

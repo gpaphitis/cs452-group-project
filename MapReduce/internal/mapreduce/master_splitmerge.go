@@ -39,32 +39,13 @@ func (mr *Master) merge() {
 	debug("Merge phase")
 	var kvs map[string]string
 	mr.FetchReducerResults(mr.jobName, mr.reducer_completed, &kvs)
-	// kvs = make(map[string]string)
-	// for i := 0; i < mr.nReduce; i++ {
-	// 	p := mergeName(mr.jobName, i)
-	// 	debug("Merge: read %s\n", p)
-	// 	file, err := os.Open(p)
-	// 	if err != nil {
-	// 		log.Fatal("Merge: ", err)
-	// 	}
-	// 	dec := json.NewDecoder(file)
-	// 	for {
-	// 		var kv KeyValue
-	// 		err = dec.Decode(&kv)
-	// 		if err != nil {
-	// 			break
-	// 		}
-	// 		kvs[kv.Key] = kv.Value
-	// 	}
-	// 	file.Close()
-	// }
 	var keys []string
 	for k := range kvs {
 		keys = append(keys, k)
 	}
 	sort.Strings(keys)
 
-	file, err := os.Create("mrtmp." + mr.jobName)
+	file, err := os.Create("/app/data/mrtmp." + mr.jobName)
 	if err != nil {
 		log.Fatal("Merge: create ", err)
 	}

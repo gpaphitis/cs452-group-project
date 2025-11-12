@@ -2,13 +2,13 @@ version: "3.8"
 
 services:
   index-server:
-    build:
-      context: ..
-      dockerfile: worker.Dockerfile
-    image: cs452-worker
+    # build:
+    #   context: ..
+    #   dockerfile: docker/worker.Dockerfile
+    image: giorgospaphitis/personal:cs452-worker
     ports:
-      - "${HOST_PORT:-7778}:${HOST_PORT:-7778}"
-    command: worker node0:9100 node1:${HOST_PORT:-7778}
+      - "${WORKER_PORT:-7778}:${WORKER_PORT:-7778}"
+    command: worker node0:9100 node1:${WORKER_PORT:-7778}
     working_dir: /app
     volumes:
-      - ../MapReduce/test/data:/app/data
+      - /mnt/mapReduceData:/app/data
