@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net"
 	"sync"
+	"time"
 )
 
 // Master holds all the state that the master needs to keep track of.
@@ -24,8 +25,8 @@ type Master struct {
 	l        net.Listener
 	stats    []int
 
-	funcSpec FunctionSpec
-	mapper_completed []string
+	funcSpec          FunctionSpec
+	mapper_completed  []string
 	reducer_completed []string
 }
 
@@ -75,18 +76,21 @@ func newMaster(master string) (mr *Master) {
 //
 // Note that this implementation assumes a shared file system.
 func (mr *Master) run(jobName string, files []string, schedule func(phase jobPhase), finish func()) {
+	start := time.Now()
 	mr.jobName = jobName
 	mr.files = files
 	debug("%s: Starting Map/Reduce task %s\n", mr.address, mr.jobName)
 
 	schedule(mapPhase)
 	schedule(reducePhase)
-	
+
 	mr.merge()
-	
+
 	finish()
 	debug("%s: Map/Reduce task completed\n", mr.address)
 
+	elapsed := time.Since(start)
+	debug("Job finished in: %d\n", elapsed.Milliseconds())
 	mr.doneChannel <- true
 }
 

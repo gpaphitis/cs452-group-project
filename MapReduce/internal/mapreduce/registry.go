@@ -48,7 +48,8 @@ func MapReverseIndex(filename string, contents string) []KeyValue {
 		if b.Len() == 0 {
 			return
 		}
-		w := strings.ToLower(b.String())
+		// w := strings.ToLower(b.String())
+		w := b.String()
 		seenWords[w] = struct{}{}
 		b.Reset()
 	}

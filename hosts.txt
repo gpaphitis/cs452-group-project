@@ -1,3 +1,3 @@
-sm110p-10s10612.wisc.cloudlab.us
-c240g5-110131.wisc.cloudlab.us
-c240g5-110101.wisc.cloudlab.us
+c220g1-030816.wisc.cloudlab.us
+c220g1-030815.wisc.cloudlab.us
+c220g1-030808.wisc.cloudlab.us

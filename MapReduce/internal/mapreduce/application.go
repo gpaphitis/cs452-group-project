@@ -66,7 +66,7 @@ func (app *Application) RunTask(args *RunTaskArgs, reply *RunTaskReply) error {
 		MapName:    mapName,
 		ReduceName: reduceName,
 	})
-
+	
 	// Start the job asynchronously.
 	go app.Master.run(jobName, files, app.Master.schedule, func() {
 		// app.Master.stats = app.Master.killWorkers()
