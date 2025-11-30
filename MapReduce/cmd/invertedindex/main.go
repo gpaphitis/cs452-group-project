@@ -68,8 +68,8 @@ func runApplicationMode(args []string) {
 		log.Fatalf("failed to start Application RPC server: %v", err)
 	}
 
-	fmt.Printf("✅ Application listening for RunTask RPCs on %s\n", appAddr)
-	fmt.Printf("✅ Master listening for Worker RPCs on %s\n", masterAddr)
+	fmt.Printf("Application listening for RunTask RPCs on %s\n", appAddr)
+	fmt.Printf("Master listening for Worker RPCs on %s\n", masterAddr)
 	fmt.Println("Waiting for RunTask calls...")
 
 	select {} // block forever
@@ -83,7 +83,7 @@ func runWorkerMode(args []string) {
 	masterAddr := args[0]
 	workerAddr := args[1]
 
-	fmt.Printf("🚀 Starting worker at %s, registering with master %s...\n", workerAddr, masterAddr)
+	fmt.Printf("Starting worker at %s, registering with master %s...\n", workerAddr, masterAddr)
 
 	// Create and start the worker.
 	mapreduce.RunWorker(masterAddr, workerAddr, 100)
